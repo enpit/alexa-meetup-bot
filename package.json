@@ -1,0 +1,29 @@
+{
+  "name": "alexa-meetup-bot",
+  "version": "1.0.0",
+  "description": "Ask Alexa for tech meetups in Germany",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enpit/alexa-meetup-bot.git"
+  },
+  "keywords": [
+    "alexa",
+    "meetups",
+    "meetup",
+    "bot"
+  ],
+  "author": "Janis Krasemann <janis.krasemann@enpit.de> (http://www.enpit.de)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enpit/alexa-meetup-bot/issues"
+  },
+  "homepage": "https://github.com/enpit/alexa-meetup-bot#readme",
+  "dependencies": {
+    "alexa-sdk": "^1.0.7",
+    "meetup-api": "^1.4.6"
+  }
+}
