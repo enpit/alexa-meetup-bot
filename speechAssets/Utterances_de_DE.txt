@@ -2,14 +2,14 @@ GetMeetupsIntent die nächsten Meetups
 GetMeetupsIntent kommende Meetups
 GetMeetupsIntent Meetups
 GetMeetupsIntent sag mir die nächsten Meetups
-GetMeetupsIntent welche Meetups kann ich besuchen?
+GetMeetupsIntent welche Meetups kann ich besuchen
 GetMeetupsIntent die nächsten Treffen
 GetMeetupsIntent kommende Treffen
 GetMeetupsIntent Treffen
 GetMeetupsIntent sag mir die nächsten Treffen
-GetMeetupsIntent welche Treffen kann ich besuchen?
+GetMeetupsIntent welche Treffen kann ich besuchen
 GetMeetupsIntent die nächsten Zusammenkünfte
 GetMeetupsIntent kommende Zusammenkünfte
 GetMeetupsIntent Zusammenkünfte
 GetMeetupsIntent sag mir die nächsten Zusammenkünfte
-GetMeetupsIntent welche Zusammenkünfte kann ich besuchen?
+GetMeetupsIntent welche Zusammenkünfte kann ich besuchen
