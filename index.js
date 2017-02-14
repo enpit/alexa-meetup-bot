@@ -1,7 +1,7 @@
 'use strict';
 var Alexa = require('alexa-sdk');
 var meetups = require('./meetups');
-var ssml = require('./ssml');
+var ssml = require('ssml');
 var APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
 var languageStrings = {
@@ -49,7 +49,7 @@ var handlers = {
                     return allMeetups += meetup.name + city + '<break />';
                 }, '');
                 // Create speech output
-                var speechOutput = alexa.t("GET_MEETUPS_MESSAGE") + ssml.correct(meetupsInfo);
+                var speechOutput = alexa.t("GET_MEETUPS_MESSAGE") + ssml.correct(meetupsInfo, 'de-DE');
                 alexa.emit(':tellWithCard', speechOutput, alexa.t("SKILL_NAME"), meetupsInfo);
             } else {
                 alexa.emit('AMAZON.HelpIntent');
