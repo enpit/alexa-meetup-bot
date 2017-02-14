@@ -1,5 +1,6 @@
 'use strict';
 var Alexa = require('alexa-sdk');
+var meetups = require('./meetups');
 var APP_ID = undefined;  // TODO replace with your app ID (OPTIONAL).
 
 var languageStrings = {
@@ -31,11 +32,28 @@ var handlers = {
         this.emit('GetMeetups');
     },
     'GetMeetups': function () {
-        // TODO: Query the meetups API for the coming meetups
-        var meetup = "DOAG Konferenz im November in Nürnberg";
-        // Create speech output
-        var speechOutput = this.t("GET_MEETUPS_MESSAGE") + meetup;
-        this.emit(':tellWithCard', speechOutput, this.t("SKILL_NAME"), meetup)
+        var alexa = this;
+        // Use general lat / lng of germany as long as alexa-sdk does not provide a way to get the device's location:
+        var lat = '51.1657';
+        var lng = '10.4515';
+        meetups.find(lat, lng, function (error, meta, body) {
+            if (meta.status === 200) {
+                var meetups = JSON.parse(body);
+                var meetupsInfo = meetups.reduce(function reducer (allMeetups, meetup) {
+                    var city = '';
+                    if (meetup.venue && meetup.venue.city) {
+                        city = ' in ' + meetup.venue.city;
+                    }
+
+                    return allMeetups += meetup.name + city + '<break />';
+                }, '');
+                // Create speech output
+                var speechOutput = alexa.t("GET_MEETUPS_MESSAGE") + meetupsInfo;
+                alexa.emit(':tellWithCard', speechOutput, alexa.t("SKILL_NAME"), meetupsInfo);
+            } else {
+                alexa.emit('AMAZON.HelpIntent');
+            }
+        });
     },
     'AMAZON.HelpIntent': function () {
         var speechOutput = this.t("HELP_MESSAGE");
