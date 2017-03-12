@@ -44,7 +44,7 @@ var handlers = {
                 var meetupsInfo = meetups.reduce(function reducer (allMeetups, meetup) {
                     var city = '';
                     if (meetup.venue && meetup.venue.city) {
-                        city = ' in ' + meetup.venue.city;
+                        city = ', in ' + meetup.venue.city;
                     }
 
                     return allMeetups += meetup.name + city + '. ';
