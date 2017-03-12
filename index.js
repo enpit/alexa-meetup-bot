@@ -16,7 +16,7 @@ var languageStrings = {
     }
 };
 
-exports.handler = function(event, context, callback) {
+exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.APP_ID = APP_ID;
     // To enable string internationalization (i18n) features, set a resources object.
@@ -40,13 +40,14 @@ var handlers = {
         meetups.find(lat, lng, function (error, meta, body) {
             if (meta.status === 200) {
                 var meetups = JSON.parse(body);
+                meetups.splice(5); // Reduce results to 5 meetups
                 var meetupsInfo = meetups.reduce(function reducer (allMeetups, meetup) {
                     var city = '';
                     if (meetup.venue && meetup.venue.city) {
                         city = ' in ' + meetup.venue.city;
                     }
 
-                    return allMeetups += meetup.name + city + '<break />';
+                    return allMeetups += meetup.name + city + '. ';
                 }, '');
                 // Create speech output
                 var speechOutput = alexa.t("GET_MEETUPS_MESSAGE") + ssml.correct(meetupsInfo, 'de-DE');
