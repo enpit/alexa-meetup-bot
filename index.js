@@ -27,7 +27,7 @@ exports.handler = function(event, context) {
 
 var handlers = {
     'LaunchRequest': function () {
-        this.emit('GetMeetups');
+        this.emit('AMAZON.HelpIntent');
     },
     'GetMeetupsIntent': function () {
         this.emit('GetMeetups');
@@ -39,16 +39,8 @@ var handlers = {
         var lng = '10.4515';
         meetups.find(lat, lng, function (error, meta, body) {
             if (meta.status === 200) {
-                var meetups = JSON.parse(body);
-                meetups.splice(5); // Reduce results to 5 meetups
-                var meetupsInfo = meetups.reduce(function reducer (allMeetups, meetup) {
-                    var city = '';
-                    if (meetup.venue && meetup.venue.city) {
-                        city = ', in ' + meetup.venue.city;
-                    }
-
-                    return allMeetups += meetup.name + city + '. ';
-                }, '');
+                var meetupsArray = JSON.parse(body);
+                var meetupsInfo = meetups.extract(meetupsArray, 5);
                 // Create speech output
                 var speechOutput = alexa.t("GET_MEETUPS_MESSAGE") + ssml.correct(meetupsInfo, 'de-DE');
                 alexa.emit(':tellWithCard', speechOutput, alexa.t("SKILL_NAME"), meetupsInfo);
